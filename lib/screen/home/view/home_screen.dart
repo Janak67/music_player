@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/screen/home/view/music_screen.dart';
-import 'package:music_player/screen/music/view/music_player_screen.dart';
+import 'package:music_player/screen/music/view/music_screen.dart';
+import 'package:music_player/utils/color.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,11 +16,18 @@ class _HomeScreenState extends State<HomeScreen> {
       length: 2,
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: black,
           appBar: AppBar(
             centerTitle: true,
-            title: const Text('Music Player'),
-            bottom: const TabBar(
-              tabs: [
+            backgroundColor: black,
+            title: Text(
+              'Music Player',
+              style: TextStyle(color: white),
+            ),
+            bottom: TabBar(
+              indicatorColor: white,
+              labelColor: white,
+              tabs: const [
                 Tab(icon: Icon(Icons.music_note), text: 'Music'),
                 Tab(icon: Icon(Icons.video_collection), text: 'Video'),
               ],
@@ -29,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: const TabBarView(
             children: [
               MusicScreen(),
-              MusicPlayerScreen(),
+              MusicScreen(),
             ],
           ),
         ),

@@ -1,9 +1,3 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-import '../model/home_model.dart';
-
-class HomeProvider with ChangeNotifier {
-  List<HomeModel> musicList = [
-    HomeModel(image: '', title: '', music: ''),
-  ];
-}
+class HomeProvider with ChangeNotifier {}
