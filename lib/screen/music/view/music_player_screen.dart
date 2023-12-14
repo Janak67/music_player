@@ -40,14 +40,18 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(color: white),
           title: Text(
             "Mx Player",
             style: TextStyle(fontSize: 25, color: white),
           ),
           centerTitle: true,
           backgroundColor: black,
+          actions: [
+            Icon(Icons.share_outlined, color: white),
+          ],
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: black,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -55,58 +59,24 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
-                  "${providerw!.musicList[providerw!.index].image}",
-                  height: MediaQuery.sizeOf(context).height * 0.30,
-                  width: MediaQuery.sizeOf(context).width * 0.60,
-                  fit: BoxFit.cover,
+                  '${providerw!.musicList[providerw!.index].image}',
+                  height: MediaQuery.sizeOf(context).height * 0.3,
+                  width: MediaQuery.sizeOf(context).width * 0.6,
                 ),
               ),
               const SizedBox(height: 20),
               Text(
-                "${providerw!.musicList[providerw!.index].title}",
-                style: TextStyle(color: white, fontSize: 25),
+                '${providerw!.musicList[providerw!.index].title}',
+                style: TextStyle(
+                  color: white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: white,
-                      size: 30,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      if (providerr!.isPlay == false) {
-                        player.play();
-                        providerr!.changeStatus(true);
-                      } else {
-                        player.pause();
-                        providerr!.changeStatus(false);
-                      }
-                    },
-                    icon: Icon(
-                      providerw!.isPlay ? Icons.pause : Icons.play_arrow,
-                      color: white,
-                      size: 40,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.arrow_forward,
-                      color: white,
-                      size: 30,
-                    ),
-                  ),
-                ],
+              const SizedBox(height: 5),
+              Text(
+                "Tanishk Bagchi, Vishal Dadlani",
+                style: TextStyle(fontSize: 12, color: white),
               ),
               PlayerBuilder.currentPosition(
                 player: player,
@@ -114,34 +84,83 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Slider(
-                      min: 0,
-                      max: providerr!.totalDuration.inSeconds.toDouble(),
+                      activeColor: white,
+                      inactiveColor: Colors.grey.shade900 ,
                       value: position.inSeconds.toDouble(),
-                      activeColor: green,
                       onChanged: (value) {
                         player.seek(
-                          Duration(
-                            seconds: value.toInt(),
-                          ),
+                          Duration(seconds: value.toInt()),
                         );
                       },
+                      min: 0,
+                      max: providerr!.totalDuration.inSeconds.toDouble(),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
                         children: [
                           Text(
-                            "$position",
+                            '$position',
                             style: TextStyle(color: white, fontSize: 15),
                           ),
                           const Spacer(),
                           Text(
-                            "${providerw!.totalDuration}",
+                            '${providerw!.totalDuration}',
                             style: TextStyle(color: white, fontSize: 15),
                           ),
                         ],
                       ),
-                    )
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.shuffle, color: white),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.skip_previous,
+                            size: 40,
+                            color: white,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            if (providerr!.isPlay == false) {
+                              player.play();
+                              providerr!.changeStatus(true);
+                            } else {
+                              player.pause();
+                              providerr!.changeStatus(false);
+                            }
+                          },
+                          icon: Icon(
+                            providerw!.isPlay
+                                ? Icons.pause_circle
+                                : Icons.play_circle,
+                            size: 60,
+                            color: white,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.skip_next,
+                            color: white,
+                            size: 40,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.repeat,
+                            color: white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
