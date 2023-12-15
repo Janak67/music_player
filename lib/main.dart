@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_player/screen/music/provider/music_provider.dart';
+import 'package:music_player/screen/video/provider/video_provider.dart';
 import 'package:music_player/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (context) => MusicProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => VideoProvider(),
         ),
       ],
       child: MaterialApp(

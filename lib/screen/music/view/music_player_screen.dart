@@ -13,23 +13,34 @@ class MusicPlayerScreen extends StatefulWidget {
 }
 
 class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
-  AssetsAudioPlayer player = AssetsAudioPlayer();
-
   MusicProvider? providerr;
   MusicProvider? providerw;
 
   @override
   void initState() {
     super.initState();
-    player.open(
+    loadSong();
+  }
+
+  void loadSong() {
+    context.read<MusicProvider>().player.open(
         Audio(
             "${context.read<MusicProvider>().musicList[context.read<MusicProvider>().index].music}"),
         autoStart: false,
         showNotification: true);
 
-    player.current.listen((event) {
+    context.read<MusicProvider>().player.current.listen((event) {
       Duration d1 = event!.audio.duration;
       context.read<MusicProvider>().changTotalDuration(d1);
+    });
+    liveDuration();
+  }
+
+  void liveDuration() {
+    context.read<MusicProvider>().player.currentPosition.listen((event) {
+      if (context.read<MusicProvider>().player.stopped) {
+        context.read<MusicProvider>().changeStatus(false);
+      }
     });
   }
 
@@ -75,22 +86,22 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
               ),
               const SizedBox(height: 5),
               Text(
-                "Tanishk Bagchi, Vishal Dadlani",
+                '${providerw!.musicList[providerw!.index].subTitle}',
                 style: TextStyle(fontSize: 12, color: white),
               ),
               PlayerBuilder.currentPosition(
-                player: player,
+                player: context.read<MusicProvider>().player,
                 builder: (context, position) => Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Slider(
                       activeColor: white,
-                      inactiveColor: Colors.grey.shade900 ,
+                      inactiveColor: Colors.grey.shade900,
                       value: position.inSeconds.toDouble(),
                       onChanged: (value) {
-                        player.seek(
-                          Duration(seconds: value.toInt()),
-                        );
+                        context.read<MusicProvider>().player.seek(
+                              Duration(seconds: value.toInt()),
+                            );
                       },
                       min: 0,
                       max: providerr!.totalDuration.inSeconds.toDouble(),
@@ -100,12 +111,12 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                       child: Row(
                         children: [
                           Text(
-                            '$position',
+                            position.toString().split('.')[0],
                             style: TextStyle(color: white, fontSize: 15),
                           ),
                           const Spacer(),
                           Text(
-                            '${providerw!.totalDuration}',
+                            providerw!.totalDuration.toString().split('.')[0],
                             style: TextStyle(color: white, fontSize: 15),
                           ),
                         ],
@@ -119,7 +130,12 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                           icon: Icon(Icons.shuffle, color: white),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (providerr!.index > 0) {
+                              providerr!.changIndex(--providerr!.index);
+                            }
+                            loadSong();
+                          },
                           icon: Icon(
                             Icons.skip_previous,
                             size: 40,
@@ -129,10 +145,10 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                         IconButton(
                           onPressed: () {
                             if (providerr!.isPlay == false) {
-                              player.play();
+                              context.read<MusicProvider>().player.play();
                               providerr!.changeStatus(true);
                             } else {
-                              player.pause();
+                              context.read<MusicProvider>().player.pause();
                               providerr!.changeStatus(false);
                             }
                           },
@@ -145,7 +161,13 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (providerr!.index <
+                                providerr!.musicList.length - 1) {
+                              providerr!.changIndex(++providerr!.index);
+                            }
+                            loadSong();
+                          },
                           icon: Icon(
                             Icons.skip_next,
                             color: white,

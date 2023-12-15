@@ -1,6 +1,5 @@
-class MusicModel
-{
-  String? image,title,music;
+class MusicModel {
+  String? image, title, music, subTitle;
 
-  MusicModel({this.image, this.music, this.title});
+  MusicModel({this.image, this.music, this.title, this.subTitle});
 }

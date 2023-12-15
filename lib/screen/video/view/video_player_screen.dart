@@ -1,6 +1,10 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:music_player/screen/video/provider/video_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../../utils/color.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   const VideoPlayerScreen({super.key});
@@ -10,29 +14,37 @@ class VideoPlayerScreen extends StatefulWidget {
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  VideoPlayerController? videoPlayerController;
-  ChewieController? controller;
-
   @override
   void initState() {
     super.initState();
-    videoPlayerController =
+    context.read<VideoProvider>().videoPlayerController =
         VideoPlayerController.asset('assets/video/BROOM_BROOM.mp4')
           ..initialize().then((value) {
             setState(() {});
           });
-    controller =
-        ChewieController(videoPlayerController: videoPlayerController!);
+    context.read<VideoProvider>().controller = ChewieController(
+        videoPlayerController:
+            context.read<VideoProvider>().videoPlayerController!);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: AlignmentDirectional.topStart,
-      child: SizedBox(
-        height: 380,
-        width: MediaQuery.sizeOf(context).width,
-        child: Chewie(controller: controller!),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: white),
+          backgroundColor: black,
+        ),
+        backgroundColor: black,
+        body: Align(
+          alignment: AlignmentDirectional.topStart,
+          child: SizedBox(
+            height: 380,
+            width: MediaQuery.sizeOf(context).width,
+            child:
+                Chewie(controller: context.read<VideoProvider>().controller!),
+          ),
+        ),
       ),
     );
   }

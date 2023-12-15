@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music_player/screen/music/view/music_screen.dart';
-import 'package:music_player/screen/video/view/video_player_screen.dart';
 import 'package:music_player/utils/color.dart';
+
+import '../../video/view/video_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: const TabBarView(
             children: [
               MusicScreen(),
-              VideoPlayerScreen(),
+              VideoScreen(),
             ],
           ),
         ),
