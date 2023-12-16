@@ -48,145 +48,151 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
   Widget build(BuildContext context) {
     providerr = context.read<MusicProvider>();
     providerw = context.watch<MusicProvider>();
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: white),
-          title: Text(
-            "Mx Player",
-            style: TextStyle(fontSize: 25, color: white),
+    return PopScope(
+      onPopInvoked: (didPop) {
+        context.read<MusicProvider>().player.pause();
+        context.read<MusicProvider>().isPlay = false;
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            iconTheme: IconThemeData(color: white),
+            title: Text(
+              "Mx Player",
+              style: TextStyle(fontSize: 25, color: white),
+            ),
+            centerTitle: true,
+            backgroundColor: black,
+            actions: [
+              Icon(Icons.share_outlined, color: white),
+            ],
           ),
-          centerTitle: true,
           backgroundColor: black,
-          actions: [
-            Icon(Icons.share_outlined, color: white),
-          ],
-        ),
-        backgroundColor: black,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  '${providerw!.musicList[providerw!.index].image}',
-                  height: MediaQuery.sizeOf(context).height * 0.3,
-                  width: MediaQuery.sizeOf(context).width * 0.6,
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    '${providerw!.musicList[providerw!.index].image}',
+                    height: MediaQuery.sizeOf(context).height * 0.3,
+                    width: MediaQuery.sizeOf(context).width * 0.6,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                '${providerw!.musicList[providerw!.index].title}',
-                style: TextStyle(
-                  color: white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 20),
+                Text(
+                  '${providerw!.musicList[providerw!.index].title}',
+                  style: TextStyle(
+                    color: white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                '${providerw!.musicList[providerw!.index].subTitle}',
-                style: TextStyle(fontSize: 12, color: white),
-              ),
-              PlayerBuilder.currentPosition(
-                player: context.read<MusicProvider>().player,
-                builder: (context, position) => Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Slider(
-                      activeColor: white,
-                      inactiveColor: Colors.grey.shade900,
-                      value: position.inSeconds.toDouble(),
-                      onChanged: (value) {
-                        context.read<MusicProvider>().player.seek(
-                              Duration(seconds: value.toInt()),
-                            );
-                      },
-                      min: 0,
-                      max: providerr!.totalDuration.inSeconds.toDouble(),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
+                const SizedBox(height: 5),
+                Text(
+                  '${providerw!.musicList[providerw!.index].subTitle}',
+                  style: TextStyle(fontSize: 12, color: white),
+                ),
+                PlayerBuilder.currentPosition(
+                  player: context.read<MusicProvider>().player,
+                  builder: (context, position) => Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Slider(
+                        activeColor: white,
+                        inactiveColor: Colors.grey.shade900,
+                        value: position.inSeconds.toDouble(),
+                        onChanged: (value) {
+                          context.read<MusicProvider>().player.seek(
+                                Duration(seconds: value.toInt()),
+                              );
+                        },
+                        min: 0,
+                        max: providerr!.totalDuration.inSeconds.toDouble(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              position.toString().split('.')[0],
+                              style: TextStyle(color: white, fontSize: 15),
+                            ),
+                            const Spacer(),
+                            Text(
+                              providerw!.totalDuration.toString().split('.')[0],
+                              style: TextStyle(color: white, fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
-                            position.toString().split('.')[0],
-                            style: TextStyle(color: white, fontSize: 15),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.shuffle, color: white),
                           ),
-                          const Spacer(),
-                          Text(
-                            providerw!.totalDuration.toString().split('.')[0],
-                            style: TextStyle(color: white, fontSize: 15),
+                          IconButton(
+                            onPressed: () {
+                              if (providerr!.index > 0) {
+                                providerr!.changIndex(--providerr!.index);
+                              }
+                              loadSong();
+                            },
+                            icon: Icon(
+                              Icons.skip_previous,
+                              size: 40,
+                              color: white,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              if (providerr!.isPlay == false) {
+                                context.read<MusicProvider>().player.play();
+                                providerr!.changeStatus(true);
+                              } else {
+                                context.read<MusicProvider>().player.pause();
+                                providerr!.changeStatus(false);
+                              }
+                            },
+                            icon: Icon(
+                              providerw!.isPlay
+                                  ? Icons.pause_circle
+                                  : Icons.play_circle,
+                              size: 60,
+                              color: white,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              if (providerr!.index <
+                                  providerr!.musicList.length - 1) {
+                                providerr!.changIndex(++providerr!.index);
+                              }
+                              loadSong();
+                            },
+                            icon: Icon(
+                              Icons.skip_next,
+                              color: white,
+                              size: 40,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.repeat,
+                              color: white,
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.shuffle, color: white),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            if (providerr!.index > 0) {
-                              providerr!.changIndex(--providerr!.index);
-                            }
-                            loadSong();
-                          },
-                          icon: Icon(
-                            Icons.skip_previous,
-                            size: 40,
-                            color: white,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            if (providerr!.isPlay == false) {
-                              context.read<MusicProvider>().player.play();
-                              providerr!.changeStatus(true);
-                            } else {
-                              context.read<MusicProvider>().player.pause();
-                              providerr!.changeStatus(false);
-                            }
-                          },
-                          icon: Icon(
-                            providerw!.isPlay
-                                ? Icons.pause_circle
-                                : Icons.play_circle,
-                            size: 60,
-                            color: white,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            if (providerr!.index <
-                                providerr!.musicList.length - 1) {
-                              providerr!.changIndex(++providerr!.index);
-                            }
-                            loadSong();
-                          },
-                          icon: Icon(
-                            Icons.skip_next,
-                            color: white,
-                            size: 40,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.repeat,
-                            color: white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

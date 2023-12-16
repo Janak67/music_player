@@ -29,20 +29,25 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: white),
+    return PopScope(
+      onPopInvoked: (didPop) async {
+        await context.read<VideoProvider>().controller?.pause();
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            iconTheme: IconThemeData(color: white),
+            backgroundColor: black,
+          ),
           backgroundColor: black,
-        ),
-        backgroundColor: black,
-        body: Align(
-          alignment: AlignmentDirectional.topStart,
-          child: SizedBox(
-            height: 380,
-            width: MediaQuery.sizeOf(context).width,
-            child:
-                Chewie(controller: context.read<VideoProvider>().controller!),
+          body: Align(
+            alignment: AlignmentDirectional.topStart,
+            child: SizedBox(
+              height: 380,
+              width: MediaQuery.sizeOf(context).width,
+              child:
+                  Chewie(controller: context.read<VideoProvider>().controller!),
+            ),
           ),
         ),
       ),
