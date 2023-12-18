@@ -7,6 +7,10 @@ import '../model/video_model.dart';
 class VideoProvider with ChangeNotifier {
   List<VideoModel> videoList = [
     VideoModel(
+        title: 'Animal',
+        image: 'assets/img/arjan-vailly.jpg',
+        video: 'assets/video/ANIMAL__ARJAN_VAILLY.mp4'),
+    VideoModel(
         title: 'Pathaan',
         image: 'assets/img/pathaan.jpeg',
         video: 'assets/video/Jhoome_Jo_Pathaan.mp4'),
