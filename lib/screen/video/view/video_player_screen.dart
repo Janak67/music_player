@@ -18,7 +18,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void initState() {
     super.initState();
     context.read<VideoProvider>().videoPlayerController =
-        VideoPlayerController.asset('assets/video/BROOM_BROOM.mp4')
+        VideoPlayerController.asset(
+            '${context.read<VideoProvider>().videoList[context.read<VideoProvider>().index].video}')
           ..initialize().then((value) {
             setState(() {});
           });

@@ -1,5 +1,5 @@
 class VideoModel {
-  String? image, title;
+  String? image, title, video;
 
-  VideoModel({this.image, this.title});
+  VideoModel({this.image, this.title, this.video});
 }
