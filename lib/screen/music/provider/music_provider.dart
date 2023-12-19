@@ -25,6 +25,12 @@ class MusicProvider with ChangeNotifier {
   Duration totalDuration = const Duration(seconds: 0);
   int index = 0;
   AssetsAudioPlayer player = AssetsAudioPlayer();
+  int sliderIndex = 0;
+
+  void changeIndexSlider(int i) {
+    sliderIndex = i;
+    notifyListeners();
+  }
 
   void changIndex(int i) {
     index = i;
