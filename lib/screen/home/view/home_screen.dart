@@ -29,25 +29,31 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: black,
-          bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: teal,
-            currentIndex: providerw!.index,
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.music_note, size: 30, color: black),
-                  label: 'Music'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.video_collection, size: 30, color: black),
-                  label: 'Video'),
-            ],
-            unselectedLabelStyle: TextStyle(
-                color: black, fontWeight: FontWeight.bold, fontSize: 16),
-            selectedLabelStyle: TextStyle(
-                color: black, fontWeight: FontWeight.bold, fontSize: 16),
-            onTap: (value) {
-              int i = value;
-              providerr!.changIndex(i);
-            },
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(18),
+              child: BottomNavigationBar(
+                backgroundColor: teal,
+                currentIndex: providerw!.index,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.music_note, size: 30, color: black),
+                      label: 'Music'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.video_collection, size: 30, color: black),
+                      label: 'Video'),
+                ],
+                unselectedLabelStyle: TextStyle(
+                    color: black, fontWeight: FontWeight.bold, fontSize: 16),
+                selectedLabelStyle: TextStyle(
+                    color: black, fontWeight: FontWeight.bold, fontSize: 16),
+                onTap: (value) {
+                  int i = value;
+                  providerr!.changIndex(i);
+                },
+              ),
+            ),
           ),
           body: screen[providerw!.index],
         ),

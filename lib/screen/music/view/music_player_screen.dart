@@ -74,8 +74,8 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
               children: [
                 Image.asset(
                   '${providerw!.musicList[providerw!.index].image}',
-                  height: MediaQuery.sizeOf(context).height * 0.3,
-                  width: MediaQuery.sizeOf(context).width * 0.6,
+                  height: MediaQuery.sizeOf(context).height * 0.4,
+                  width: MediaQuery.sizeOf(context).width * 0.9,
                   fit: BoxFit.cover,
                 ),
                 const SizedBox(height: 20),
@@ -107,7 +107,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                               style: TextStyle(color: white, fontSize: 15),
                             ),
                             SizedBox(
-                              width: 280,
+                              width: 265,
                               child: Slider(
                                 activeColor: white,
                                 inactiveColor: Colors.grey.shade900,

@@ -27,7 +27,12 @@ class _MusicScreenState extends State<MusicScreen> {
           child: CarouselSlider.builder(
             itemCount: 3,
             itemBuilder: (context, index, realIndex) {
-              return Image.asset('${providerw!.musicList[index].image}');
+              return InkWell(
+                  onTap: () {
+                    providerr!.changIndex(index);
+                    Navigator.pushNamed(context, 'music');
+                  },
+                  child: Image.asset('${providerw!.musicList[index].image}'));
             },
             options: CarouselOptions(
               autoPlay: true,
@@ -77,7 +82,8 @@ class _MusicScreenState extends State<MusicScreen> {
                   ),
                   trailing: Icon(
                     Icons.arrow_forward_ios,
-                    color: white,size: 18,
+                    color: white,
+                    size: 18
                   ),
                 ),
               );

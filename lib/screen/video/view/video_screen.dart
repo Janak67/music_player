@@ -30,7 +30,7 @@ class _VideoScreenState extends State<VideoScreen> {
               return InkWell(
                   onTap: () {
                     providerr!.changIndex(index);
-                    Navigator.pushNamed(context, 'music');
+                    Navigator.pushNamed(context, 'video');
                   },
                   child: Image.asset('${providerw!.videoList[index].image}'));
             },
@@ -80,10 +80,8 @@ class _VideoScreenState extends State<VideoScreen> {
                     "${providerw!.videoList[index].title}",
                     style: TextStyle(color: white, fontSize: 18),
                   ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    color: white,
-                  ),
+                  trailing:
+                      Icon(Icons.arrow_forward_ios, color: white, size: 18),
                 ),
               );
             },
