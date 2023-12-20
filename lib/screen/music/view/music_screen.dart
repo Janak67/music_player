@@ -25,13 +25,9 @@ class _MusicScreenState extends State<MusicScreen> {
         SizedBox(
           height: 200,
           child: CarouselSlider.builder(
-            itemCount: 5,
+            itemCount: 3,
             itemBuilder: (context, index, realIndex) {
-              return Container(
-                margin: const EdgeInsets.all(10),
-                width: MediaQuery.sizeOf(context).width,
-                color: Colors.primaries[index],
-              );
+              return Image.asset('${providerw!.musicList[index].image}');
             },
             options: CarouselOptions(
               autoPlay: true,
@@ -40,16 +36,17 @@ class _MusicScreenState extends State<MusicScreen> {
               onPageChanged: (index, reason) {
                 providerr!.changeIndexSlider(index);
               },
-              initialPage: 0,
+              initialPage: providerr!.sliderIndex,
             ),
           ),
         ),
+        const SizedBox(height: 20),
         SizedBox(
           width: MediaQuery.sizeOf(context).width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
-              5,
+              3,
               (index) => containerTile(index),
             ),
           ),
@@ -69,18 +66,18 @@ class _MusicScreenState extends State<MusicScreen> {
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
                       "${providerw!.musicList[index].image}",
-                      height: 80,
+                      height: 90,
                       width: 50,
                       fit: BoxFit.cover,
                     ),
                   ),
                   title: Text(
                     "${providerw!.musicList[index].title}",
-                    style: TextStyle(color: white, fontSize: 20),
+                    style: TextStyle(color: white, fontSize: 18),
                   ),
                   trailing: Icon(
                     Icons.arrow_forward_ios,
-                    color: white,
+                    color: white,size: 18,
                   ),
                 ),
               );

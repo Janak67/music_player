@@ -30,16 +30,20 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           backgroundColor: black,
           bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: white,
-            currentIndex: providerr!.index,
-            items: const [
+            backgroundColor: teal,
+            currentIndex: providerw!.index,
+            items: [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.music_note, size: 28),
+                  icon: Icon(Icons.music_note, size: 30, color: black),
                   label: 'Music'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.video_collection, size: 28),
+                  icon: Icon(Icons.video_collection, size: 30, color: black),
                   label: 'Video'),
             ],
+            unselectedLabelStyle: TextStyle(
+                color: black, fontWeight: FontWeight.bold, fontSize: 16),
+            selectedLabelStyle: TextStyle(
+                color: black, fontWeight: FontWeight.bold, fontSize: 16),
             onTap: (value) {
               int i = value;
               providerr!.changIndex(i);

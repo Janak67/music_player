@@ -5,6 +5,11 @@ import '../model/music_model.dart';
 class MusicProvider with ChangeNotifier {
   List<MusicModel> musicList = [
     MusicModel(
+        image: 'assets/img/fighter.jpg',
+        music: 'assets/music/Sher Khul Gaye.mp3',
+        title: 'Fighter',
+        subTitle: 'Vishal-Sheykhar, Benny Dayal, Shilpa Rao'),
+    MusicModel(
         image: 'assets/img/animal.png',
         music: 'assets/music/Jamal Kudu.mp3',
         title: 'Animal',
@@ -19,6 +24,22 @@ class MusicProvider with ChangeNotifier {
         music: 'assets/music/Tiger3.mp3',
         title: 'Tiger 3',
         subTitle: 'Pritam.Arijit Singh.Nikhita Gandhi'),
+    MusicModel(
+        image: 'assets/img/kalaastar.jpg',
+        music: 'assets/music/Kalaastar.mp3',
+        title: 'Yo Yo Honey Singh',
+        subTitle: 'Gill Machhrai, Rony Ajnali, Yo Yo Honey Singh'),
+    MusicModel(
+        image: 'assets/img/what-jhumka.png',
+        music: 'assets/music/What Jhumka.mp3',
+        title: 'Rocky Aur Rani Ki Prem Kahani',
+        subTitle:
+            'Arijit Singh, Jonita Gandhi, Ranveer Singh, Madan Mohan, Pritam'),
+    MusicModel(
+        image: 'assets/img/high-heels.jpg',
+        music: 'assets/music/High Heels.mp3',
+        title: 'High Heels - Ki and Ka',
+        subTitle: 'Yo Yo Honey Singh'),
   ];
 
   bool isPlay = false;

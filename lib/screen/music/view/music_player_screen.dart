@@ -72,13 +72,11 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    '${providerw!.musicList[providerw!.index].image}',
-                    height: MediaQuery.sizeOf(context).height * 0.3,
-                    width: MediaQuery.sizeOf(context).width * 0.6,
-                  ),
+                Image.asset(
+                  '${providerw!.musicList[providerw!.index].image}',
+                  height: MediaQuery.sizeOf(context).height * 0.3,
+                  width: MediaQuery.sizeOf(context).width * 0.6,
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(height: 20),
                 Text(
@@ -94,23 +92,12 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                   '${providerw!.musicList[providerw!.index].subTitle}',
                   style: TextStyle(fontSize: 12, color: white),
                 ),
+                const SizedBox(height: 80),
                 PlayerBuilder.currentPosition(
                   player: context.read<MusicProvider>().player,
                   builder: (context, position) => Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Slider(
-                        activeColor: white,
-                        inactiveColor: Colors.grey.shade900,
-                        value: position.inSeconds.toDouble(),
-                        onChanged: (value) {
-                          context.read<MusicProvider>().player.seek(
-                                Duration(seconds: value.toInt()),
-                              );
-                        },
-                        min: 0,
-                        max: providerr!.totalDuration.inSeconds.toDouble(),
-                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
@@ -119,7 +106,22 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                               position.toString().split('.')[0],
                               style: TextStyle(color: white, fontSize: 15),
                             ),
-                            const Spacer(),
+                            SizedBox(
+                              width: 280,
+                              child: Slider(
+                                activeColor: white,
+                                inactiveColor: Colors.grey.shade900,
+                                value: position.inSeconds.toDouble(),
+                                onChanged: (value) {
+                                  context.read<MusicProvider>().player.seek(
+                                        Duration(seconds: value.toInt()),
+                                      );
+                                },
+                                min: 0,
+                                max: providerr!.totalDuration.inSeconds
+                                    .toDouble(),
+                              ),
+                            ),
                             Text(
                               providerw!.totalDuration.toString().split('.')[0],
                               style: TextStyle(color: white, fontSize: 15),

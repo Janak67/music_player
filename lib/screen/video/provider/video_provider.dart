@@ -26,9 +26,14 @@ class VideoProvider with ChangeNotifier {
   int index = 0;
   VideoPlayerController? videoPlayerController;
   ChewieController? controller;
+  int sliderIndex = 0;
 
   void changIndex(int i) {
     index = i;
+    notifyListeners();
+  }
+  void changeIndexSlider(int i) {
+    sliderIndex = i;
     notifyListeners();
   }
 }
