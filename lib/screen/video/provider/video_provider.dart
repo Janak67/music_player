@@ -9,7 +9,7 @@ class VideoProvider with ChangeNotifier {
     VideoModel(
         title: 'ICC T20 World_Cup',
         image: 'assets/img/india vs pak.jpg',
-        video: 'assets/video/'),
+        video: 'assets/video/ICC_T20_World_Cup_2022.mp4'),
     VideoModel(
         title: 'Justin Bieber',
         image: 'assets/img/justin_bieber.jpg',
@@ -25,7 +25,7 @@ class VideoProvider with ChangeNotifier {
     VideoModel(
         title: 'Don Omar',
         image: 'assets/img/don_omar.jpg',
-        video: 'assets/video/'),
+        video: 'assets/video/Don_Omar.mp4'),
     VideoModel(
         title: 'Pathaan',
         image: 'assets/img/pathaan.jpeg',
