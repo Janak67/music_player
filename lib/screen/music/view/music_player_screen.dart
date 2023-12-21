@@ -142,6 +142,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                                 providerr!.changIndex(--providerr!.index);
                               }
                               loadSong();
+                              providerr!.isPlay = false;
                             },
                             icon: Icon(
                               Icons.skip_previous,
@@ -174,6 +175,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                                 providerr!.changIndex(++providerr!.index);
                               }
                               loadSong();
+                              providerr!.isPlay = false;
                             },
                             icon: Icon(
                               Icons.skip_next,
