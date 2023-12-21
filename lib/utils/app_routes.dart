@@ -8,6 +8,6 @@ import '../screen/home/view/home_screen.dart';
 Map<String, WidgetBuilder> screen_Routes = {
   '/': (context) => const SplashScreen(),
   'home': (context) => const HomeScreen(),
-  'music': (context) =>  const MusicPlayerScreen(),
-  'video': (context) =>  const VideoPlayerScreen(),
+  'musicPlayer': (context) =>  const MusicPlayerScreen(),
+  'videoPlayer': (context) =>  const VideoPlayerScreen(),
 };

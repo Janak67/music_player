@@ -30,9 +30,17 @@ class _MusicScreenState extends State<MusicScreen> {
               return InkWell(
                 onTap: () {
                   providerr!.changIndex(index);
-                  Navigator.pushNamed(context, 'music');
+                  Navigator.pushNamed(context, 'musicPlayer');
                 },
-                child: Image.asset('${providerw!.musicList[index].image}'),
+                child: Container(
+                  height: MediaQuery.sizeOf(context).height*0.4,
+                  width: MediaQuery.sizeOf(context).width,
+                  margin: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Image.asset('${providerw!.musicList[index].image}'),
+                ),
               );
             },
             options: CarouselOptions(
@@ -66,7 +74,7 @@ class _MusicScreenState extends State<MusicScreen> {
                 child: ListTile(
                   onTap: () {
                     providerr!.changIndex(index);
-                    Navigator.pushNamed(context, 'music');
+                    Navigator.pushNamed(context, 'musicPlayer');
                   },
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(10),

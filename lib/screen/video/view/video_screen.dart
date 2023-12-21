@@ -30,7 +30,7 @@ class _VideoScreenState extends State<VideoScreen> {
               return InkWell(
                 onTap: () {
                   providerr!.changIndex(index);
-                  Navigator.pushNamed(context, 'video');
+                  Navigator.pushNamed(context, 'videoPlayer');
                 },
                 child: Image.asset(
                   '${providerw!.videoList[index].image}',
@@ -71,7 +71,7 @@ class _VideoScreenState extends State<VideoScreen> {
                 child: ListTile(
                   onTap: () {
                     providerr!.changIndex(index);
-                    Navigator.pushNamed(context, 'video');
+                    Navigator.pushNamed(context, 'videoPlayer');
                   },
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
