@@ -20,21 +20,21 @@ class MusicProvider with ChangeNotifier {
         title: 'Kalaastar',
         subTitle: 'Gill Machhrai, Rony Ajnali, Yo Yo Honey Singh'),
     MusicModel(
-        image: 'assets/img/pathaan.jpeg',
-        music: 'assets/music/Jhoome.mp3',
-        title: 'Jhoome Jo Pathaan',
-        subTitle: 'Vishal-Shekhar.Sanchit Balhara.Ankit Balhara'),
+        image: 'assets/img/what-jhumka.png',
+        music: 'assets/music/What Jhumka.mp3',
+        title: 'What Jhumka ?',
+        subTitle:
+            'Arijit Singh, Jonita Gandhi, Ranveer Singh, Madan Mohan, Pritam'),
     MusicModel(
         image: 'assets/img/tiger3.png',
         music: 'assets/music/Tiger3.mp3',
         title: 'Leke Prabhu ka Naam',
         subTitle: 'Pritam.Arijit Singh.Nikhita Gandhi'),
     MusicModel(
-        image: 'assets/img/what-jhumka.png',
-        music: 'assets/music/What Jhumka.mp3',
-        title: 'What Jhumka ?',
-        subTitle:
-            'Arijit Singh, Jonita Gandhi, Ranveer Singh, Madan Mohan, Pritam'),
+        image: 'assets/img/pathaan.jpeg',
+        music: 'assets/music/Jhoome.mp3',
+        title: 'Jhoome Jo Pathaan',
+        subTitle: 'Vishal-Shekhar.Sanchit Balhara.Ankit Balhara'),
     MusicModel(
         image: 'assets/img/high-heels.jpg',
         music: 'assets/music/High Heels.mp3',

@@ -25,14 +25,15 @@ class _MusicScreenState extends State<MusicScreen> {
         SizedBox(
           height: 200,
           child: CarouselSlider.builder(
-            itemCount: 3,
+            itemCount: 5,
             itemBuilder: (context, index, realIndex) {
               return InkWell(
-                  onTap: () {
-                    providerr!.changIndex(index);
-                    Navigator.pushNamed(context, 'music');
-                  },
-                  child: Image.asset('${providerw!.musicList[index].image}'));
+                onTap: () {
+                  providerr!.changIndex(index);
+                  Navigator.pushNamed(context, 'music');
+                },
+                child: Image.asset('${providerw!.musicList[index].image}'),
+              );
             },
             options: CarouselOptions(
               autoPlay: true,
@@ -45,13 +46,13 @@ class _MusicScreenState extends State<MusicScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 20),
         SizedBox(
+          height: 40,
           width: MediaQuery.sizeOf(context).width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
-              3,
+              5,
               (index) => containerTile(index),
             ),
           ),
@@ -80,11 +81,8 @@ class _MusicScreenState extends State<MusicScreen> {
                     "${providerw!.musicList[index].title}",
                     style: TextStyle(color: white, fontSize: 18),
                   ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    color: white,
-                    size: 18
-                  ),
+                  trailing:
+                      Icon(Icons.arrow_forward_ios, color: white, size: 18),
                 ),
               );
             },
@@ -97,8 +95,8 @@ class _MusicScreenState extends State<MusicScreen> {
   Container containerTile(int index) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
-      height: 8,
-      width: 8,
+      height: 7,
+      width: 7,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: index == providerw!.sliderIndex ? blue : white),

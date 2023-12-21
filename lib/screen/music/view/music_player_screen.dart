@@ -58,8 +58,8 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
           appBar: AppBar(
             iconTheme: IconThemeData(color: white),
             title: Text(
-              "Mx Player",
-              style: TextStyle(fontSize: 25, color: white),
+              '${providerw!.musicList[providerw!.index].title}',
+              style: TextStyle(color: white),
             ),
             centerTitle: true,
             backgroundColor: black,

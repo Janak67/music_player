@@ -7,9 +7,25 @@ import '../model/video_model.dart';
 class VideoProvider with ChangeNotifier {
   List<VideoModel> videoList = [
     VideoModel(
+        title: 'ICC T20 World_Cup',
+        image: 'assets/img/india vs pak.jpg',
+        video: 'assets/video/'),
+    VideoModel(
+        title: 'Justin Bieber',
+        image: 'assets/img/justin_bieber.jpg',
+        video: 'assets/video/Justin_Bieber.mp4'),
+    VideoModel(
         title: 'Animal',
         image: 'assets/img/arjan-vailly.jpg',
         video: 'assets/video/ANIMAL__ARJAN_VAILLY.mp4'),
+    VideoModel(
+        title: 'Shakira',
+        image: 'assets/img/shakira.jpg',
+        video: 'assets/video/Shakira.mp4'),
+    VideoModel(
+        title: 'Don Omar',
+        image: 'assets/img/don_omar.jpg',
+        video: 'assets/video/'),
     VideoModel(
         title: 'Pathaan',
         image: 'assets/img/pathaan.jpeg',
@@ -22,6 +38,10 @@ class VideoProvider with ChangeNotifier {
         title: 'Animal',
         image: 'assets/img/animal.png',
         video: 'assets/video/JAMAL_KUDU.mp4'),
+    VideoModel(
+        title: 'Hold Me',
+        image: 'assets/img/Hold-Me.jpg',
+        video: 'assets/video/Hold_Me.mp4'),
   ];
   int index = 0;
   VideoPlayerController? videoPlayerController;
@@ -32,6 +52,7 @@ class VideoProvider with ChangeNotifier {
     index = i;
     notifyListeners();
   }
+
   void changeIndexSlider(int i) {
     sliderIndex = i;
     notifyListeners();

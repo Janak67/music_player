@@ -14,6 +14,9 @@ class VideoPlayerScreen extends StatefulWidget {
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+  VideoProvider? providerr;
+  VideoProvider? providerw;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +33,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    providerr = context.read<VideoProvider>();
+    providerw = context.watch<VideoProvider>();
     return PopScope(
       onPopInvoked: (didPop) async {
         await context.read<VideoProvider>().controller?.pause();
@@ -37,15 +42,19 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              '${providerw!.videoList[providerw!.index].title}',
+              style: TextStyle(color: white),
+            ),
             iconTheme: IconThemeData(color: white),
             backgroundColor: black,
           ),
           backgroundColor: black,
-          body: Align(
-            alignment: AlignmentDirectional.topStart,
+          body: Center(
             child: SizedBox(
-              height: 380,
-              width: MediaQuery.sizeOf(context).width,
+              height: 240,
+              width: double.infinity,
               child:
                   Chewie(controller: context.read<VideoProvider>().controller!),
             ),

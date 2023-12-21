@@ -25,14 +25,20 @@ class _VideoScreenState extends State<VideoScreen> {
         SizedBox(
           height: 200,
           child: CarouselSlider.builder(
-            itemCount: 4,
+            itemCount: 5,
             itemBuilder: (context, index, realIndex) {
               return InkWell(
-                  onTap: () {
-                    providerr!.changIndex(index);
-                    Navigator.pushNamed(context, 'video');
-                  },
-                  child: Image.asset('${providerw!.videoList[index].image}'));
+                onTap: () {
+                  providerr!.changIndex(index);
+                  Navigator.pushNamed(context, 'video');
+                },
+                child: Image.asset(
+                  '${providerw!.videoList[index].image}',
+                  fit: BoxFit.cover,
+                  height: 200,
+                  width: 240,
+                ),
+              );
             },
             options: CarouselOptions(
               autoPlay: true,
@@ -41,17 +47,17 @@ class _VideoScreenState extends State<VideoScreen> {
               onPageChanged: (index, reason) {
                 providerr!.changeIndexSlider(index);
               },
-              initialPage: providerr!.sliderIndex,
+              initialPage: providerw!.sliderIndex,
             ),
           ),
         ),
-        const SizedBox(height: 20),
         SizedBox(
+          height: 40,
           width: MediaQuery.sizeOf(context).width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
-              4,
+              5,
               (index) => containerTile(index),
             ),
           ),
@@ -94,8 +100,8 @@ class _VideoScreenState extends State<VideoScreen> {
   Container containerTile(int index) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
-      height: 8,
-      width: 8,
+      height: 7,
+      width: 7,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: index == providerw!.sliderIndex ? blue : white),
